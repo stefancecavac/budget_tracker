@@ -2,7 +2,7 @@ import { useState } from "react"
 import { UseBudgetContext } from "../../hooks/useBudgetHook"
 
 const AddExpense = () => {
-    const { budgets ,dispatch } = UseBudgetContext()
+    const { budgets, dispatch } = UseBudgetContext()
     const [selectedBudget, setSelectedBudget] = useState('')
     const [name, setName] = useState('')
     const [amount, setAmount] = useState('')
@@ -33,7 +33,7 @@ const AddExpense = () => {
                 <h2 className='text-gray-500 text-2xl font-bold mb-2'>Add new expense</h2>
 
                 <label className='text-gray-500 mb-1'>Budget:</label>
-                <select
+                <select className="border-2 border-teal-500 rounded p-1 mb-1"
                     value={selectedBudget}
                     onChange={(e) => setSelectedBudget(e.target.value)}
                 >
@@ -45,16 +45,19 @@ const AddExpense = () => {
                     ))}
                 </select>
 
-                <div>
+                <div className='flex items-center justify-between'>
                     <label className='text-gray-500 mb-1'>Expense name:</label>
+                    <label className='text-gray-500 mb-1'>Expense amount:</label>
+                </div>
+                <div className='flex items-center justify-between mb-5'>
+
                     <input onChange={(e) => setName(e.target.value)}
                         value={name}
-                        className='border-2 border-teal-500 rounded p-1 mb-1'></input>
+                        className='border-2 border-teal-500 rounded p-1 w-auto'></input>
 
-                    <label className='text-gray-500 mb-1'>Expense amount:</label>
-                    <input onChange={(e) => setAmount(e.target.value)}
+                    <input type="number" onChange={(e) => setAmount(e.target.value)}
                         value={amount}
-                        className='border-2 border-teal-500 rounded p-1 mb-5'></input>
+                        className='border-2 border-teal-500 rounded p-1  w-16 '></input>
                 </div>
 
 
