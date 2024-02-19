@@ -2,19 +2,27 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema
 
-const budgetModel = new Schema({ 
-    title:{
-        type:String,
-        required:true
+const expenseSchema = new Schema({
+    name: {
+        type: String,
+        required: true
     },
-    budget:{
-        type:Number,
-        required:true
+    amount: {
+        type: Number,
+        required: true
     },
-    expenses:{
-        type:Array
-    }
-    
+});
+
+const budgetModel = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    budget: {
+        type: Number,
+        required: true
+    },
+    expenses: [expenseSchema]
 })
 
-export default mongoose.model("Budget" , budgetModel)
+export default mongoose.model("Budget", budgetModel)
