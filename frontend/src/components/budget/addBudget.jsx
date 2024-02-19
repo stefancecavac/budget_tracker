@@ -41,7 +41,7 @@ const AddBudget = () => {
 
                 <label className='text-gray-500 mb-1'>Budget amount:</label>
 
-                <input onChange={(e) => setBudget(e.target.value)}
+                <input type="number" min="0" step='.01'  onChange={(e) => setBudget(e.target.value)}
                     value={budget}
                     className='border-2 border-teal-500 rounded p-1 mb-5'></input>
 

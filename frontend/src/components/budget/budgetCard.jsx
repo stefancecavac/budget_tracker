@@ -3,11 +3,15 @@
 const BudgetCard = ({ budget }) => {
     const totalExpenses = budget.expenses.reduce((acc, expense) => acc + expense.amount, 0);
 
+    function currencyFormat(num) {
+        return '$' + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+     }
+
     return (
         <div className='border-4 border-teal-500 rounded-2xl shadow p-3'>
             <div className="flex justify-between">
                 <p className="text-2xl text-teal-500 font-bold">{budget.title}</p>
-                <p className="text-2xl text-teal-500 font-bold">${budget.budget}</p>
+                <p className="text-2xl text-teal-500 font-bold">{currencyFormat(budget.budget)}</p>
             </div>
             
             <div className="flex justify-center mt-5 mb-3">
@@ -16,9 +20,8 @@ const BudgetCard = ({ budget }) => {
             </div>
 
             <div className="flex justify-between">
-            <p>Spent: ${totalExpenses}</p>
-            <p>Remaining: ${budget.budget - totalExpenses}</p>
-
+            <p className="text-teal-500">Spent: {currencyFormat(totalExpenses)}</p>
+            <p className="text-gray-400">Remaining: {currencyFormat(budget.budget - totalExpenses)}</p>
             </div>
 
           

@@ -55,9 +55,9 @@ const AddExpense = () => {
                         value={name}
                         className='border-2 border-teal-500 rounded p-1 w-auto'></input>
 
-                    <input type="number" onChange={(e) => setAmount(e.target.value)}
+                    <input type="number" min="0" step='.01' onChange={(e) => setAmount(e.target.value)}
                         value={amount}
-                        className='border-2 border-teal-500 rounded p-1  w-16 '></input>
+                        className='border-2 border-teal-500 rounded p-1  w-32 '></input>
                 </div>
 
 
