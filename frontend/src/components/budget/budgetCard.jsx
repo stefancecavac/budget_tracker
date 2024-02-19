@@ -10,7 +10,7 @@ const BudgetCard = ({ budget }) => {
             </div>
 
 
-            <p>{budget.expenses}</p>
+       
 
         </div>
     )

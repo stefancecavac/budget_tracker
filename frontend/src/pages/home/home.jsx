@@ -13,7 +13,7 @@ const Home = () => {
             </div>
 
             <h2 className="text-3xl mb-5 font-bold text-gray-700">My budgets:</h2>
-            <div className="grid grid-cols-3">
+            <div className="grid grid-cols-3 gap-5">
                 <FetchBudget></FetchBudget>
             </div>
         </div>

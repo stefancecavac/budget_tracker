@@ -22,14 +22,16 @@ const FetchBudget = () =>{
             
         }
         fetchData()
-    })
+    },[dispatch])
 
     return(
-        <div>
-            {budgets && budgets.map((budget) => (
+        
+                
+            
+        budgets && budgets.map((budget) => (
                 <BudgetCard key={budget._id} budget={budget}></BudgetCard>
-            ))}
-        </div>
+            ))
+      
     )
 }
 
