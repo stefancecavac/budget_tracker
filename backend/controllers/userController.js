@@ -1,5 +1,6 @@
 import validator from 'validator'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import User from '../models/userModel.js'
 
 
@@ -53,8 +54,9 @@ const loginUser = async (req, res) => {
             return res.status(400).json({error:'wrong password'})
         }
         
-    
+        const token = jwt.sign({id: user.id}, process.env.SECRET ,{expiresIn:'3h'})
 
+        res.cookie('token' ,token, { httpOnly: true })
         res.status(201).json(user)
     }
     catch(error){
