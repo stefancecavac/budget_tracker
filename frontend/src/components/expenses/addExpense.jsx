@@ -10,7 +10,7 @@ const AddExpense = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch(`http://localhost:4000/api/budgets/${selectedBudget}/expenses`, {
+            const response = await fetch(`http://localhost:4000/api/budgets/${selectedBudget}/add-expenses`, {
                 method: 'PUT',
                 body: JSON.stringify({ name, amount }),
                 headers: {
@@ -21,7 +21,7 @@ const AddExpense = () => {
             const json = await response.json()
 
             if (response.ok) {
-                dispatch({ type: 'PUT_BUDGET', payload: json })
+                dispatch({ type: 'PUT_EXPENSE', payload: json })
             }
         }
         catch (error) {

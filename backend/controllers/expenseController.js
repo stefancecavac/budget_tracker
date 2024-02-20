@@ -22,4 +22,29 @@ const addExpense = async(req, res) => {
     }
 }
 
-export {addExpense}
+const deleteExpense = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+      const budget = await Budget.findById(id);
+
+      if (!budget) {
+          return res.status(404).json({ error: 'Budget not found' });
+      }
+
+      const expenseIndex = budget.expenses.findIndex((expense) => expense._id.toString());
+
+      if (expenseIndex !== -1) {
+          budget.expenses.splice(expenseIndex, 1); 
+          await budget.save();
+          res.status(200).json(budget);
+      } else {
+          return res.status(404).json({ error: 'Expense not found' });
+      }
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+};
+
+
+export {addExpense ,deleteExpense}
