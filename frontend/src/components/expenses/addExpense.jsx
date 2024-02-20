@@ -15,7 +15,8 @@ const AddExpense = () => {
                 body: JSON.stringify({ name, amount }),
                 headers: {
                     'Content-Type': 'application/json',
-                }
+                },
+                credentials: 'include'
             })
             const json = await response.json()
 
@@ -49,13 +50,13 @@ const AddExpense = () => {
                     <label className='text-gray-500 mb-1'>Expense name:</label>
                     <label className='text-gray-500 mb-1'>Expense amount:</label>
                 </div>
-                <div className='flex items-center justify-between mb-5'>
+                <div className='md:flex items-center md:justify-between mb-5 '>
 
                     <input onChange={(e) => setName(e.target.value)}
                         value={name}
                         className='border-2 border-teal-500 rounded p-1 w-auto'></input>
 
-                    <input type="number" min="0" step='.01' onChange={(e) => setAmount(e.target.value)}
+                    <input type="number" min="0" step='.01'  onChange={(e) => setAmount(e.target.value)}
                         value={amount}
                         className='border-2 border-teal-500 rounded p-1  w-32 '></input>
                 </div>

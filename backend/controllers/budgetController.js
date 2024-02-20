@@ -3,8 +3,10 @@ import mongoose from "mongoose";
 
 
 const getAllBudgets = async(req, res) => {
+
     try{
-        const budget = await Budget.find({})
+        const user_id = req.user.id
+        const budget = await Budget.find({user_id}).sort({createdAt:-1})
         res.status(200).json(budget)
     }
     catch(error){
@@ -34,9 +36,13 @@ const getSingleBudget = async(req, res) => {
 }
 
 const createBudget = async(req, res) => {
+    const {title , budget } = req.body
+    const user_id = req.user.id
+    console.log(user_id)
+    
     try{
-        const budget = await Budget.create(req.body)
-        res.status(200).json(budget)
+        const budgets = await Budget.create({user_id , title , budget})
+        res.status(200).json(budgets)
     }
     catch(error){
         res.status(500).json({error:error.message})

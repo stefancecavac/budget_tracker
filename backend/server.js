@@ -9,16 +9,19 @@ import cors from 'cors'
 
 dotenv.config()
 
+const allowedOrigin = 'http://localhost:5173'
+const corsOptions = {
+    origin: allowedOrigin,
+    credentials: true,
+};
+
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors())
+app.use(cors(corsOptions))
 
 app.use('/api/budgets' ,budgetRouter )
 app.use('/api/user',userRouter)
-
-
-
 
 
 mongoose.connect(process.env.DB_URI)

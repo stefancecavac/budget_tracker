@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import {UseBudgetContext} from '../../hooks/useBudgetHook'
 
 import BudgetCard from "./budgetCard"
+import { Link } from "react-router-dom"
 
 const FetchBudget = () =>{ 
     const {budgets , dispatch} = UseBudgetContext()
@@ -9,7 +10,9 @@ const FetchBudget = () =>{
     useEffect(() =>{
         const fetchData = async() => {
             try{
-                const response =  await fetch(`http://localhost:4000/api/budgets`)
+                const response =  await fetch(`http://localhost:4000/api/budgets`,{
+                    credentials: 'include',
+                })
                 const json = await response.json()
 
                 if(response.ok){
@@ -29,7 +32,8 @@ const FetchBudget = () =>{
                 
             
         budgets && budgets.map((budget) => (
-                <BudgetCard key={budget._id} budget={budget}></BudgetCard>
+               <Link className="transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-105  duration-100"
+                key={budget._id} to={`/${budget._id}`}><BudgetCard budget={budget}></BudgetCard></Link> 
             ))
       
     )

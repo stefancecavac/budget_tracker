@@ -22,8 +22,12 @@ const budgetModel = new Schema({
                 type: Number,
             },
         }
-    ]
+    ],
+    user_id:{
+        type:String,
+        required:true
+    }
 
-})
+} ,{timestamps:true})
 
 export default mongoose.model("Budget", budgetModel)

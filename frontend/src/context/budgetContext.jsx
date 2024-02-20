@@ -9,6 +9,10 @@ export const BudgetReducer = (state, action) => {
             return {
                 budgets: action.payload
             };
+            case "SET_BUDGET":
+                return {
+                    singleBudget: action.payload
+                };
         case 'POST_BUDGET':
             return {
                 budgets: [action.payload, ...state.budgets]

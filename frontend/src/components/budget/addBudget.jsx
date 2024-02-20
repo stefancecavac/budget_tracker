@@ -17,7 +17,9 @@ const AddBudget = () => {
                 body: JSON.stringify({ title, budget }),
                 headers: {
                     'Content-Type': 'application/json',
-                }
+                },
+                credentials: 'include',
+
             })
             const json = await response.json()
 

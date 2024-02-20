@@ -6,7 +6,7 @@ import authenticate from "../middleware/authentication.js";
 
 const router = express.Router()
 
-//router.use(authenticate)
+router.use(authenticate)
 router.get('/', getAllBudgets)
 router.get('/:id', getSingleBudget)
 
