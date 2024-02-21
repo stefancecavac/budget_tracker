@@ -9,9 +9,9 @@ import cors from 'cors'
 
 dotenv.config()
 
-const allowedOrigin = 'http://localhost:5173'
+
 const corsOptions = {
-    origin: allowedOrigin,
+    origin: 'http://localhost:5173',
     credentials: true,
 };
 

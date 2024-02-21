@@ -1,6 +1,7 @@
 import {   useParams } from "react-router-dom"
 import { UseBudgetContext } from "../../hooks/useBudgetHook"
-
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ExpenceCard = ({ expence }) => {
     const { dispatch } = UseBudgetContext()
@@ -16,10 +17,16 @@ const ExpenceCard = ({ expence }) => {
                 },
                 credentials: 'include',
             });
+            if(!response.ok){
+                toast.error("Fill out all fields")
+
+            }
     
             if (response.ok) {
                 const json = await response.json();
                 dispatch({ type: 'DELETE_EXPENSE', payload: json });
+                toast.success("Expense removed")
+
                
             } else {
               

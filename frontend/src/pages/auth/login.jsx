@@ -68,7 +68,7 @@ const Login = () => {
                     value={password}
                     placeholder="e.g..asdASD123!"></input>
 
-                <button className="bg-teal-500 rounded-full w-16 p-1 border-2 border-teal-500 text-white hover:bg-white hover:border hover:text-teal-500">Login</button>
+                <button type="submit" className="bg-teal-500 rounded-full w-16 p-1 border-2 border-teal-500 text-white hover:bg-white hover:border hover:text-teal-500">Login</button>
            <p>Dont have account? Register <Link to='/register' className="text-teal-500">here</Link></p>
             {error && <div className="bg-red-300 border-2 border-red-500 text-red-500 rounded-full p-1 mt-5">{error}</div>}
             </form>

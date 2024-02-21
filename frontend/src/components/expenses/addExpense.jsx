@@ -5,14 +5,21 @@ import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AddExpense = () => {
-    const { budgets, dispatch } = UseBudgetContext()
+    const { budgets, dispatch ,expenses} = UseBudgetContext()
     const [selectedBudget, setSelectedBudget] = useState('')
     const [name, setName] = useState('')
     const [amount, setAmount] = useState('')
 
+
+    const totalExpenses = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
+
+            if(amount > totalExpenses){
+              return  toast.error("Not enough money in budget")
+            }
 
             if (!selectedBudget || !name || !amount) {
                 toast.error("Fill out all fields");
@@ -36,7 +43,7 @@ const AddExpense = () => {
                 setAmount('')
                 setSelectedBudget('')
                 dispatch({ type: 'POST_EXPENSE', payload: json })
-                toast.success("Budget added")
+                toast.success("Expense added")
 
             }
         }
