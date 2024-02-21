@@ -6,7 +6,7 @@ const getAllBudgets = async(req, res) => {
 
     try{
         const user_id = req.user.id
-        const budget = await Budget.find({user_id}).sort({createdAt:-1})
+        const budget = await Budget.find({user_id}).populate('expenses').sort({createdAt:-1})
         res.status(200).json(budget)
     }
     catch(error){
@@ -22,7 +22,7 @@ const getSingleBudget = async(req, res) => {
             return res.status(400).json({error: 'not a valid id'})
         }
         
-        const budget = await Budget.findOne({_id : id})
+        const budget = await Budget.findOne({_id : id}).populate('expenses')
 
         if(!budget){
             return res.status(404).json({error: 'budget with that id not found'})
@@ -38,7 +38,6 @@ const getSingleBudget = async(req, res) => {
 const createBudget = async(req, res) => {
     const {title , budget } = req.body
     const user_id = req.user.id
-    console.log(user_id)
     
     try{
         const budgets = await Budget.create({user_id , title , budget})

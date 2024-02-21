@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route , Navigate } from 'react-router-dom'
 
+import { ToastContainer } from 'react-toastify'
+
 import Navbar from './components/header/navbar'
 
 import Home from './pages/home/home'
@@ -13,7 +15,9 @@ function App() {
 
   return (
     <div>
+      <ToastContainer />
       <BrowserRouter>
+
            {user && <Navbar></Navbar>}
         <Routes>
           <Route index element={!user ? (<Navigate to='/login'></Navigate>) : (<Home></Home>)}></Route>

@@ -13,16 +13,10 @@ const budgetModel = new Schema({
         type: Number,
         required: true
     },
-    expenses: [
-        {
-            name: {
-                type: String,
-            },
-            amount: {
-                type: Number,
-            },
-        }
-    ],
+    expenses:[{
+        type:mongoose.Types.ObjectId,
+        ref:'Expense'
+    } ],
     user_id:{
         type:String,
         required:true

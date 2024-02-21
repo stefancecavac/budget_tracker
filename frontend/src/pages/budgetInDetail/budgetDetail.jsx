@@ -1,36 +1,17 @@
 import { useEffect, useState } from "react"
 import { UseBudgetContext } from "../../hooks/useBudgetHook"
-import {  useParams } from 'react-router-dom'
+import {  useNavigate, useParams } from 'react-router-dom'
 
 import ExpenceCard from "../../components/expenses/expenseCard"
 
 
 
 const BudgetDetail = () => {
-    const { singleBudget, dispatch } = UseBudgetContext()
+    const { singleBudget, dispatch,expenses } = UseBudgetContext()
     const { budgetId } = useParams()
     const [loading, setLoading] = useState(true);
 
-
-    const handleDelete = async() =>{
-        try {
-            const response = await fetch(`http://localhost:4000/api/budgets/${budgetId}`, {
-                credentials: 'include',
-                method:'DELETE'
-            })
-            const json = await response.json()
-
-            if (response.ok) {
-                dispatch({ type: 'DELETE_BUDGET', payload: json })
-                window.location.reload();
-            }
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
-
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -44,6 +25,7 @@ const BudgetDetail = () => {
                 if (response.ok) {
                     dispatch({ type: 'SET_BUDGET', payload: json })
                     setLoading(false)
+                   
                 }
             }
             catch (error) {
@@ -51,10 +33,29 @@ const BudgetDetail = () => {
             }
         }
         fetchData()
-    }, [dispatch,budgetId])
+    }, [dispatch,budgetId ,expenses])
 
-    
-      const totalExpenses = singleBudget && singleBudget.expenses.reduce((acc, expense) => acc + expense.amount, 0);
+  
+
+    const handleDelete = async() =>{
+        try {
+            const response = await fetch(`http://localhost:4000/api/budgets/${budgetId}`, {
+                credentials: 'include',
+                method:'DELETE'
+            })
+            const json = await response.json()
+
+            if (response.ok) {
+                dispatch({ type: 'DELETE_BUDGET', payload: json })
+                navigate('/')
+            }
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
+    const totalExpenses = singleBudget.expenses ? singleBudget.expenses.reduce((acc, expense) => acc + expense.amount, 0) : 0;    
     
     return (
 

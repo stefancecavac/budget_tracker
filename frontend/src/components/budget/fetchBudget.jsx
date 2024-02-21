@@ -5,7 +5,7 @@ import BudgetCard from "./budgetCard"
 import { Link } from "react-router-dom"
 
 const FetchBudget = () =>{ 
-    const {budgets , dispatch} = UseBudgetContext()
+    const {budgets , dispatch , expenses} = UseBudgetContext()
     const [loading ,setLoading ] = useState(true)
 
     useEffect(() =>{
@@ -18,6 +18,8 @@ const FetchBudget = () =>{
 
                 if(response.ok){
                     dispatch({type:'SET_BUDGETS' , payload:json})
+                  
+
                     setLoading(false)
                 }
             }
@@ -27,7 +29,7 @@ const FetchBudget = () =>{
             
         }
         fetchData()
-    },[dispatch])
+    },[dispatch ,expenses]) /////////////asdaSJFADJGDAFGJDAGJND /////// neeed to add dependecyies if you want to update after deleting or updating 
 
     return(
         

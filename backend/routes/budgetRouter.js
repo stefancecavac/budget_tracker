@@ -12,8 +12,8 @@ router.get('/:id', getSingleBudget)
 
 router.post('/', createBudget)
 
-router.put('/:id/delete-expenses',deleteExpense)
-router.put('/:id/add-expenses',addExpense)
+router.delete('/:id/delete-expenses/:eId',deleteExpense)
+router.post('/:id/add-expenses',addExpense)
 router.delete('/:id', deleteBudget)
 
 

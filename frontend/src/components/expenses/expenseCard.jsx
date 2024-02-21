@@ -7,28 +7,28 @@ const ExpenceCard = ({ expence }) => {
     const {budgetId} = useParams()
     
   
-    const handleDelete = async () => {
-       
+   const handleDelete = async () => {
         try {
-            const response = await fetch(`http://localhost:4000/api/budgets/${budgetId}/delete-expenses`, {
-                method: 'PUT',
+            const response = await fetch(`http://localhost:4000/api/budgets/${budgetId}/delete-expenses/${expence._id}`, {
+                method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 credentials: 'include',
-            })
-            const json = await response.json()
-
+            });
+    
             if (response.ok) {
-
-
-                dispatch({ type: 'DELETE_EXPENSE', payload: json })
+                const json = await response.json();
+                dispatch({ type: 'DELETE_EXPENSE', payload: json });
+               
+            } else {
+              
+                console.error('Error deleting expense:', response.status);
             }
+        } catch (error) {
+            console.log(error);
         }
-        catch (error) {
-            console.log(error)
-        }
-    }
+    };
 
     return (
         <div className="flex border-2 justify-between border-dashed border-teal-500  bg-gray-200 mb-3 p-3 shadow rounded-full items-center">
